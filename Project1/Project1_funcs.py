@@ -21,11 +21,14 @@ def my_mean(vec):
 def my_var(vec, div_offset=1):
     if vec.size == 1:
         return 0
-    vec_mean = my_mean(vec)
-    diff_sq_sum = 0.0
-    for val in vec:
-        diff_sq_sum += (val - vec_mean)**2
-    return diff_sq_sum/(vec.size - div_offset)
+    if vec.ndim != 1:
+        raise TypeError('The matrix must be a one-dimensional numpy array')
+    else:
+        vec_mean = my_mean(vec)
+        diff_sq_sum = 0.0
+        for val in vec:
+            diff_sq_sum += (val - vec_mean)**2
+        return diff_sq_sum/(vec.size - div_offset)
 
 #  two-dimensional numpy array -> one-dimensional numpy array
 # computes the mean of a numerical, multidimensional data set
@@ -65,26 +68,53 @@ def corr(vec1, vec2):
 # two-dimensional numpy array -> two-dimensional numpy array
 # normalize the attributes in a two-dimensional numpy array using range normalization
 def range_norm(mat):
-    pass
+    if mat.ndim == 1:
+        raise TypeError('The matrix must be a two-dimensional numpy array')
+    else:
+        ret_mat = []
+        for col in mat:
+            ret_col= []
+            col_min = min(col)
+            col_max = max(col)
+            for val in col:
+                norm_val = (val - col_min)/(col_max-col_min)
+                ret_col.append(norm_val)
+            ret_mat.append(ret_col)
+    return ret_mat
+            
 
 # two-dimensional numpy array -> two-dimensional numpy array
 # normalize the attributes in a two-dimensional numpy array using standard normalization
 def stand_norm(mat):
-    pass
+    if mat.ndim == 1:
+        raise TypeError('The matrix must be a two-dimensional numpy array')
+    else:
+        ret_mat = []
+        for col in mat:
+            ret_col= []
+            col_mean = my_mean(col)
+            print("col_mean = " + str(col_mean))
+            col_std = math.sqrt(my_var(col))
+            print("col_std= " + str(col_std))
+            for val in col:
+                norm_val = (val - col_mean)/(col_std)
+                ret_col.append(norm_val)
+            ret_mat.append(ret_col)
+    return ret_mat
 
 # two-dimensional numpy array -> two-dimensional numpy array
 # computes the covariance matrix of a data set.
 def covar_mat(mat):
     #mat = np.transpose(mat)
     ret_mat = []
-    ret_row = []
+    ret_col = []
     for i, col1 in enumerate(mat):
-        ret_row = []
+        ret_col= []
         for j, col2 in enumerate(mat):
             if i == j:
-                ret_row.append(my_var(col1))
+                ret_col.append(my_var(col1))
             else:
-                ret_row.append(covar(col1,col2))
-        ret_mat.append(ret_row)
+                ret_col.append(covar(col1,col2))
+        ret_mat.append(ret_col)
     return ret_mat
 
