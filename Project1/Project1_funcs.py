@@ -132,8 +132,30 @@ def corr_mat(mat):
         ret_mat.append(ret_col)
     return np.array(ret_mat)
 
+# two-dimensional numpy array -> double
+# computes the total variance of a data set
 def tot_var(mat):
     my_sum = 0
     for col in mat:
         my_sum += my_var(col)
     return my_sum
+
+# one-dimensional numpy array -> one-dimensional numpy array
+# converts a categorical valued vector into a label encoded one
+def label_encode(vec):
+    new_dict = {}
+    ret_vec =[]
+    i = 0
+    for val in vec:
+        if val not in new_dict:
+            new_dict[val] = i
+            ret_vec.append(i)
+            i += 1
+        else:
+            ret_vec.append(new_dict[val])
+
+    return np.array(ret_vec)
+
+
+
+

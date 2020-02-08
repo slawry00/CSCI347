@@ -84,6 +84,12 @@ class TestStandNorm(unittest.TestCase):
         ans = np.array([[-1/math.sqrt(13), -3/math.sqrt(13),4/math.sqrt(13)]])
         np.testing.assert_array_equal(stand_norm(arr1), ans)
 
+class TestLabelEncode(unittest.TestCase):
+    def test_label_encode(self):
+        arr = np.array(['A','B','C','A','D','B','C','A'])
+        ans = np.array([0, 1, 2, 0, 3, 1, 2, 0])
+        np.testing.assert_array_equal(label_encode(arr), ans)
+
 
 if __name__ == '__main__':
     unittest.main()
