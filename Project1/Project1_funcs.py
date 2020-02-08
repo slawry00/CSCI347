@@ -81,7 +81,6 @@ def range_norm(mat):
                 ret_col.append(norm_val)
             ret_mat.append(ret_col)
     return np.array(ret_mat)
-            
 
 # two-dimensional numpy array -> two-dimensional numpy array
 # normalize the attributes in a two-dimensional numpy array using standard normalization
@@ -153,9 +152,4 @@ def label_encode(vec):
             i += 1
         else:
             ret_vec.append(new_dict[val])
-
     return np.array(ret_vec)
-
-
-
-
