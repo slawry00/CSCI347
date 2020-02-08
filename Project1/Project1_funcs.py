@@ -80,7 +80,7 @@ def range_norm(mat):
                 norm_val = (val - col_min)/(col_max-col_min)
                 ret_col.append(norm_val)
             ret_mat.append(ret_col)
-    return ret_mat
+    return np.array(ret_mat)
             
 
 # two-dimensional numpy array -> two-dimensional numpy array
@@ -93,14 +93,12 @@ def stand_norm(mat):
         for col in mat:
             ret_col= []
             col_mean = my_mean(col)
-            print("col_mean = " + str(col_mean))
             col_std = math.sqrt(my_var(col))
-            print("col_std= " + str(col_std))
             for val in col:
                 norm_val = (val - col_mean)/(col_std)
                 ret_col.append(norm_val)
             ret_mat.append(ret_col)
-    return ret_mat
+    return np.array(ret_mat)
 
 # two-dimensional numpy array -> two-dimensional numpy array
 # computes the covariance matrix of a data set.
@@ -116,5 +114,26 @@ def covar_mat(mat):
             else:
                 ret_col.append(covar(col1,col2))
         ret_mat.append(ret_col)
-    return ret_mat
+    return np.array(ret_mat)
 
+# two-dimensional numpy array -> two-dimensional numpy array
+# computes the correlation matrix of a data set.
+def corr_mat(mat):
+    #mat = np.transpose(mat)
+    ret_mat = []
+    ret_col = []
+    for i, col1 in enumerate(mat):
+        ret_col= []
+        for j, col2 in enumerate(mat):
+            if i == j:
+                ret_col.append(my_var(col1))
+            else:
+                ret_col.append(corr(col1,col2))
+        ret_mat.append(ret_col)
+    return np.array(ret_mat)
+
+def tot_var(mat):
+    my_sum = 0
+    for col in mat:
+        my_sum += my_var(col)
+    return my_sum

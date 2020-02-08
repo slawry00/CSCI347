@@ -82,7 +82,6 @@ class TestStandNorm(unittest.TestCase):
         stdsc = StandardScaler()
         arr1 = np.array([[5.0,3.0,10.0]])
         ans = np.array([[-1/math.sqrt(13), -3/math.sqrt(13),4/math.sqrt(13)]])
-        print(ans)
         np.testing.assert_array_equal(stand_norm(arr1), ans)
 
 
