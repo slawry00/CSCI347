@@ -5,6 +5,10 @@ from Project2_funcs import *
 
 edgelist = make_edgelist("proj2_data/musae_git_edges.csv")
 
+class TestEdgeList(unittest.TestCase):
+    def test_symmetric(self):
+        self.assertTrue(23977 in edgelist[0])
+        self.assertTrue(0 in edgelist[23977])
 
 # Just to view the template, I copied some in here
 #class TestMyVar(unittest.TestCase):
