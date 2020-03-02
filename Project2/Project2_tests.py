@@ -3,12 +3,22 @@ import math
 import numpy as np
 from Project2_funcs import *
 
-edgelist = make_edgelist("proj2_data/musae_git_edges.csv")
+small_e = make_edgelist("test_file.csv")
+print(small_e)
+big_e = make_edgelist("proj2_data/musae_git_edges.csv")
 
 class TestEdgeList(unittest.TestCase):
     def test_symmetric(self):
-        self.assertTrue(23977 in edgelist[0])
-        self.assertTrue(0 in edgelist[23977])
+        self.assertTrue(1 in small_e[5])
+        self.assertTrue(5 in small_e[1])
+
+class TestGetDegree(unittest.TestCase):
+    def test_degree_simple(self):
+        self.assertEqual(get_degree(small_e, 5), 3)
+    def test_degree_more(self):
+        self.assertEqual(get_degree(big_e, 831), 15)
+
+
 
 # Just to view the template, I copied some in here
 #class TestMyVar(unittest.TestCase):

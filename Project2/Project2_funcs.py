@@ -25,4 +25,7 @@ def make_edgelist(my_file):
                 my_dict[data_l[1]] = {data_l[0]}
     return my_dict
 
-
+# edgelist -> int
+# given an edgelist and a vertex, determines the degree of that vertex
+def get_degree(edgelist, vert):
+    return len(edgelist[vert])
